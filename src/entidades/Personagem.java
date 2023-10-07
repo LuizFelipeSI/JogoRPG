@@ -83,8 +83,14 @@ public class Personagem {
         }
     }
 
-    public void caminhar(double x, double y) {
-        System.out.println("Você foi para o ponto " + x + " e " + y);
+    public void caminhar(double x) {
+        MundoVirtual mv = new MundoVirtual();
+
+        if (x > mv.getX()) {
+            System.out.println("Uma das coordenadas não existe no tabuleiro");
+        } else {
+            System.out.println("Você foi para o ponto " + x);
+        }
     }
 
     public void usarHabilidades(Habilidade habilidade) {
@@ -93,5 +99,14 @@ public class Personagem {
                 System.out.println("Você ativou a habilidade " + h.getNome());
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Personagem: " + "\n" +
+                "nome = " + nome + "\n" +
+                "nivel = " + nivel + "\n" +
+                "saude = " + saude + "\n" +
+                "energia = " + energia;
     }
 }

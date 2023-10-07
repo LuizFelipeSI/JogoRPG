@@ -2,13 +2,19 @@ package entidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MundoVirtual {
 
+    private Integer posicao = 0;
+    private Integer x = 8;
+    private int[] tabuleiro = new int[x];
     private Double progresso;
     private List<Personagem> personagens;
     private List<Missao> missoes;
     private List<Inimigo> inimigos;
+
+    Scanner sc = new Scanner(System.in);
 
     public MundoVirtual() {
         this.progresso = 0.0;
@@ -37,6 +43,14 @@ public class MundoVirtual {
         return inimigos;
     }
 
+    public Integer getX() {
+        return x;
+    }
+
+    public int[] getTabuleiro() {
+        return tabuleiro;
+    }
+
     public void inicarMissao(Missao missao, Personagem personagem) {
         missao.iniciar(personagem);
     }
@@ -54,7 +68,9 @@ public class MundoVirtual {
     }
 
     public void caminharPersonagem(Personagem personagem) {
-        personagem.caminhar(7, 15);
+        System.out.println("Digite as coordenadas:");
+        int x = sc.nextInt();
+        personagem.caminhar(x);
     }
 
     public void pegarItemPersonagem(Personagem personagem, Item item) {
@@ -67,5 +83,9 @@ public class MundoVirtual {
 
     public void usarItemPersonagem(Personagem personagem, Item item) {
         personagem.usarItem(item);
+    }
+
+    public void checarProgresso() {
+        System.out.println("Progresso do jogo: " + ((100 / x) * (posicao + 1)));
     }
 }

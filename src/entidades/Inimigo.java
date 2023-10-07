@@ -63,4 +63,13 @@ public class Inimigo {
         personagem.setSaude(personagem.getSaude() - 30);
         System.out.println(personagem.getNome() + " está com " + personagem.getSaude() + " de saúde");
     }
+
+    @Override
+    public String toString() {
+        return "Inimigo: " + "\n" +
+                "nome = " + nome + "\n" +
+                "nivel = " + nivel + "\n" +
+                "saude = " + saude + "\n" +
+                "energia = " + energia;
+    }
 }
