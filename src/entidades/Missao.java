@@ -53,7 +53,7 @@ public class Missao {
         mv.getPersonagens().get(0).pegarItem(mv,3);
     }
 
-    public void fracassar(MundoVirtual mv) {
+    public void fracassar() {
         System.out.println("Voçê morreu!!!");
     }
 }

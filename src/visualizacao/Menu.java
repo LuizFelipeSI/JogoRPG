@@ -224,7 +224,7 @@ public class Menu {
                     System.out.println("2 - estatisticas do personagem");
                     System.out.println("3 - estatisticas do inimigo");
                     System.out.println("4 - checar progresso");
-                    System.out.println("5 - usar ULTIMATE");
+                    System.out.println("5 - usar ULTIMATE - custo de energia: 100 (aumenta sua vida e seu dano em 50 pontos)");
                     n = scan.next();
 
                     if (Pattern.matches("[a-zA-Z]+", n)) {

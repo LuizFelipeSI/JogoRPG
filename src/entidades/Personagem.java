@@ -103,7 +103,7 @@ public class Personagem {
             System.out.println("vez do inimigo:");
             mv.getInimigos().get(x).atacar(mv.getPersonagens().get(0));
             if (mv.getPersonagens().get(0).getSaude() <= 0) {
-                mv.getMissoes().get(0).fracassar(mv);
+                mv.getMissoes().get(0).fracassar();
                 mv.setPosicao(mv.getPosicao() + 1);
 
             } else {
