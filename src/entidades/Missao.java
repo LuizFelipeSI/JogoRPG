@@ -48,11 +48,10 @@ public class Missao {
         System.out.println("A missão " + this.titulo + " foi iniciada por " + personagem.getNome());
     }
 
-    public void completar(Personagem personagem) {
+    public void completar(MundoVirtual mv) {
+
         System.out.println("A missão " + this.titulo + " foi completada");
-        for (Item item : recompensas) {
-            personagem.getItens().add(item);
-        }
+        mv.getPersonagens().get(0).pegarItem(mv,3);
     }
 
     public void atualizar() {

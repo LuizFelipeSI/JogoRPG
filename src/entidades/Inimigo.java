@@ -6,19 +6,21 @@ import java.util.List;
 public class Inimigo {
 
     private String nome;
-    private Integer nivel;
+    private Integer dano;
     private Integer saude;
     private Integer energia;
+    private Integer nivel;
     private List<Habilidade> habilidadesCombate;
 
     public Inimigo() {
     }
 
-    public Inimigo(String nome, Integer nivel, Integer saude, Integer energia) {
+    public Inimigo(String nome, Integer dano, Integer saude, Integer energia, Integer nivel) {
         this.nome = nome;
-        this.nivel = nivel;
+        this.dano = dano;
         this.saude = saude;
         this.energia = energia;
+        this.nivel = nivel;
         this.habilidadesCombate = new ArrayList<>();
     }
 
@@ -31,11 +33,19 @@ public class Inimigo {
     }
 
     public Integer getNivel() {
-        return nivel;
+        return dano;
     }
 
     public void setNivel(Integer nivel) {
-        this.nivel = nivel;
+        this.dano = nivel;
+    }
+
+    public Integer getDano() {
+        return dano;
+    }
+
+    public void setDano(Integer dano) {
+        this.dano = dano;
     }
 
     public Integer getSaude() {
@@ -59,8 +69,8 @@ public class Inimigo {
     }
 
     public void atacar(Personagem personagem) {
-        System.out.println(this.nome + " atacou " + personagem.getNome() + " com " + habilidadesCombate.get(0).getNome());
-        personagem.setSaude(personagem.getSaude() - 30);
+        System.out.println(this.nome + " atacou " + personagem.getNome());
+        personagem.setSaude(personagem.getSaude() - getDano());
         System.out.println(personagem.getNome() + " está com " + personagem.getSaude() + " de saúde");
     }
 
@@ -68,7 +78,7 @@ public class Inimigo {
     public String toString() {
         return "Inimigo: " + "\n" +
                 "nome = " + nome + "\n" +
-                "nivel = " + nivel + "\n" +
+                "dano = " + dano + "\n" +
                 "saude = " + saude + "\n" +
                 "energia = " + energia;
     }

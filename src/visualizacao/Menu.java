@@ -8,85 +8,275 @@ import java.util.regex.Pattern;
 public class Menu {
 
     public MundoVirtual mv;
-
-    public void menu(MundoVirtual mv) {
-
-        Personagem p = new Personagem("matheus", 12, 112, 212);
-
-        Inimigo i = new Inimigo("corrupção", 30, 80, 190);
-
-        Habilidade h1 = new Habilidade("veneno", "envenena os cara", 40);
-        Habilidade h2 = new Habilidade("visão raio laser", "vê tudo", 60);
-        Habilidade h3 = new Habilidade("teleporte de 1m", "teleporta 1m pra frente", 30);
-        Habilidade h4 = new Habilidade("beijo lento", "apixona qualquer um", 25);
-
-        Item i1 = new Item("roupa do homem sereia", "roupa do homem sereia", "armadura");
-        Item i2 = new Item("ocarina do Link", "instrumento angelical", "arma");
-        Item i3 = new Item("anel do lanterna", "brilha verde", "acessório");
-        Item i4 = new Item("pistola 9mm", "fura moletom", "arma");
-
-        Missao m1 = new Missao("procurar o dedo do lula", "em uma majestosa e desafiadora busca pelo" +
-                " dedo de lula, matheus passará por poucas e boas");
+    Scanner scan = new Scanner(System.in);
+    String n;
+    int numero;
 
 
-        p.getItens().add(i1);
-        p.getItens().add(i2);
-        p.getItens().add(i3);
-        p.getItens().add(i4);
-
-        p.getHabilidades().add(h1);
-        p.getHabilidades().add(h2);
-
-        i4.getEfeitos().add("tiro");
-        i2.getEfeitos().add("música boa");
-
-
-
-        m1.getRecompensas().add(i3);
-        m1.getRecompensas().add(i4);
-        m1.getObjetivos().add(m1.getTitulo());
-
-        i.getHabilidadesCombate().add(h4);
-
-        Scanner scan = new Scanner(System.in);
-
-        String n;
+    public void menuPosicao(MundoVirtual mv) {
 
         while(true) {
-            System.out.println("------------------------------");
-            System.out.println("1 - iniciar missão");
-            System.out.println("2 - atacar");
-            System.out.println("3 - caminhar");
-            System.out.println("4 - pegar item");
-            System.out.println("5 - usar item");
-            System.out.println("6 - completar missão");
-            System.out.println("0 - sair");
-            System.out.println("------------------------------");
-            n = scan.next();
 
-            if (Pattern.matches("[a-zA-Z]+", n)){
-                System.out.println("Somente números são válidos!");
-            } else {
-                int numero = Integer.parseInt(n);
+            if (mv.getPosicao() == 0) {
+                System.out.println("fase inicial:");
+                System.out.println("1 - caminhar");
+                System.out.println("2 - estatisticas do personagem");
+                System.out.println("3 - checar progresso");
+                n = scan.next();
 
-                if (numero == 1) {
-                    mv.inicarMissao(m1, p);
-                } else if (numero == 2) {
-                    mv.ataquePersonagem(p, i);
-                } else if (numero == 3) {
-                    mv.caminharPersonagem(p);
-                } else if (numero == 4) {
-                    mv.pegarItemPersonagem(p, i4);
-                } else if (numero == 5) {
-                    mv.usarItemPersonagem(p, i2);
-                } else if (numero == 6) {
-                    mv.completarMissao(m1, p);
-                } else if (numero == 0) {
-                    break;
+                if (Pattern.matches("[a-zA-Z]+", n)) {
+                    System.out.println("Somente números são válidos!");
                 } else {
-                    System.out.println("opção inválida");
+                    numero = Integer.parseInt(n);
+
+                    if (numero == 1) {
+                        mv.getPersonagens().get(0).caminhar(mv);
+                    } else if (numero == 2) {
+                        System.out.println(mv.getPersonagens().get(0).toString());
+                    } else if (numero == 3) {
+                        mv.checarProgresso();
+                    }
+                }
+
+            } else if (mv.getPosicao() == 1) {
+                System.out.println("fase 2:");
+                System.out.println("Um inimigo te desafiou!");
+                System.out.println("1 - atacar");
+                System.out.println("2 - estatisticas do personagem");
+                System.out.println("3 - estatisticas do inimigo");
+                System.out.println("4 - checar progresso");
+                n = scan.next();
+
+                if (Pattern.matches("[a-zA-Z]+", n)) {
+                    System.out.println("Somente números são válidos!");
+                } else {
+                    numero = Integer.parseInt(n);
+
+                    if (numero == 1) {
+                        mv.getPersonagens().get(0).atacar(mv.getInimigos().get(0));
+                        System.out.println("você derrotou o inimigo!");
+                        mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
+                        System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
+                        mv.getPersonagens().get(0).pegarItem(mv,0);
+                        mv.getPersonagens().get(0).usarItem(mv,0);
+                        mv.getPersonagens().get(0).getItens().add(mv.getItens().get(0));
+
+                        mv.setPosicao(mv.getPosicao() + 1);
+                    } else if (numero == 2) {
+                        System.out.println(mv.getPersonagens().get(0).toString());
+                    } else if (numero == 3) {
+                        System.out.println(mv.getInimigos().get(0).toString());
+                    }
+                    else if (numero == 4) {
+                        mv.checarProgresso();
+                    }
+                }
+
+            } else if (mv.getPosicao() == 2) {
+                System.out.println("fase 3:");
+                System.out.println("1 - caminhar");
+                System.out.println("2 - estatisticas do personagem");
+                System.out.println("3 - checar progresso");
+                n = scan.next();
+
+                if (Pattern.matches("[a-zA-Z]+", n)) {
+                    System.out.println("Somente números são válidos!");
+                } else {
+                    numero = Integer.parseInt(n);
+
+                    if (numero == 1) {
+                        mv.getPersonagens().get(0).caminhar(mv);
+                    } else if (numero == 2) {
+                        System.out.println(mv.getPersonagens().get(0).toString());
+                    } else if (numero == 3) {
+                        mv.checarProgresso();
+                    }
+                }
+
+            } else if (mv.getPosicao() == 3) {
+                System.out.println("fase 4:");
+                System.out.println("Um inimigo te desafiou!");
+                System.out.println("1 - atacar");
+                System.out.println("2 - estatisticas do personagem");
+                System.out.println("3 - estatisticas do inimigo");
+                System.out.println("4 - checar progresso");
+                n = scan.next();
+
+                if (Pattern.matches("[a-zA-Z]+", n)) {
+                    System.out.println("Somente números são válidos!");
+                } else {
+                    numero = Integer.parseInt(n);
+
+                    if (numero == 1) {
+                        mv.getPersonagens().get(0).atacar(mv.getInimigos().get(1));
+                        System.out.println("você derrotou o inimigo!");
+                        mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
+                        System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
+                        mv.getPersonagens().get(0).pegarItem(mv,1);
+                        mv.getPersonagens().get(0).usarItem(mv,1);
+                        mv.getPersonagens().get(0).getItens().add(mv.getItens().get(1));
+
+                        mv.setPosicao(mv.getPosicao() + 1);
+                    } else if (numero == 2) {
+                        System.out.println(mv.getPersonagens().get(0).toString());
+                    } else if (numero == 3) {
+                        System.out.println(mv.getInimigos().get(1).toString());
+                    } else if (numero == 4) {
+                        mv.checarProgresso();
+                    }
+                }
+
+            } else if (mv.getPosicao() == 4) {
+                System.out.println("fase 5:");
+                System.out.println("1 - caminhar");
+                System.out.println("2 - estatisticas do personagem");
+                System.out.println("3 - checar progresso");
+                n = scan.next();
+
+                if (Pattern.matches("[a-zA-Z]+", n)) {
+                    System.out.println("Somente números são válidos!");
+                } else {
+                    numero = Integer.parseInt(n);
+
+                    if (numero == 1) {
+                        mv.getPersonagens().get(0).caminhar(mv);
+                    } else if (numero == 2) {
+                        System.out.println(mv.getPersonagens().get(0).toString());
+                    } else if (numero == 3) {
+                        mv.checarProgresso();
+                    }
+                }
+
+            } else if (mv.getPosicao() == 5) {
+                System.out.println("fase 6:");
+                System.out.println("Um inimigo te desafiou!");
+                System.out.println("1 - atacar");
+                System.out.println("2 - estatisticas do personagem");
+                System.out.println("3 - estatisticas do inimigo");
+                System.out.println("4 - checar progresso");
+                n = scan.next();
+
+                if (Pattern.matches("[a-zA-Z]+", n)) {
+                    System.out.println("Somente números são válidos!");
+                } else {
+                    numero = Integer.parseInt(n);
+
+                    if (numero == 1) {
+                        mv.getPersonagens().get(0).atacar(mv.getInimigos().get(2));
+                        System.out.println("você derrotou o inimigo!");
+                        mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
+                        System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
+                        if (mv.getPersonagens().get(0).getNivel() == 4) {
+                            System.out.println("você desbloqueou a sua ULTIMATE!");
+                        }
+                        mv.getPersonagens().get(0).pegarItem(mv,2);
+                        mv.getPersonagens().get(0).usarItem(mv,2);
+                        mv.getPersonagens().get(0).getItens().add(mv.getItens().get(2));
+
+                        mv.setPosicao(mv.getPosicao() + 1);
+                    } else if (numero == 2) {
+                        System.out.println(mv.getPersonagens().get(0).toString());
+                    } else if (numero == 3) {
+                        System.out.println(mv.getInimigos().get(2).toString());
+                    } else if (numero == 4) {
+                        mv.checarProgresso();
+                    }
+                }
+
+            } else if (mv.getPosicao() == 6) {
+                System.out.println("fase 7:");
+                System.out.println("1 - caminhar");
+                System.out.println("2 - estatisticas do personagem");
+                System.out.println("3 - checar progresso");
+                n = scan.next();
+
+                if (Pattern.matches("[a-zA-Z]+", n)) {
+                    System.out.println("Somente números são válidos!");
+                } else {
+                    numero = Integer.parseInt(n);
+
+                    if (numero == 1) {
+                        mv.getPersonagens().get(0).caminhar(mv);
+                    } else if (numero == 2) {
+                        System.out.println(mv.getPersonagens().get(0).toString());
+                    } else if (numero == 3) {
+                        mv.checarProgresso();
+                    }
+                }
+            }
+
+            else if (mv.getPosicao() == 7) {
+                if (mv.getPersonagens().get(0).getNivel() == 4) {
+                    System.out.println("fase final:");
+                    System.out.println("O BOSS TE DESAFIOU!");
+                    System.out.println("1 - atacar");
+                    System.out.println("2 - estatisticas do personagem");
+                    System.out.println("3 - estatisticas do inimigo");
+                    System.out.println("4 - checar progresso");
+                    System.out.println("5 - usar ULTIMATE");
+                    n = scan.next();
+
+                    if (Pattern.matches("[a-zA-Z]+", n)) {
+                        System.out.println("Somente números são válidos!");
+                    } else {
+                        numero = Integer.parseInt(n);
+
+                        if (numero == 1) {
+                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
+                            System.out.println("vez do inimigo:");
+                            mv.getInimigos().get(3).atacar(mv.getPersonagens().get(0));
+                            System.out.println("sua vez:");
+                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
+                            System.out.println("você derrotou o inimigo!");
+                            mv.getMissoes().get(0).completar(mv);
+                            mv.setPosicao(mv.getPosicao() + 1);
+                            break;
+                        } else if (numero == 2) {
+                            System.out.println(mv.getPersonagens().get(0).toString());
+                        } else if (numero == 3) {
+                            System.out.println(mv.getInimigos().get(3).toString());
+                        } else if (numero == 4) {
+                            mv.checarProgresso();
+                        } else if (numero == 5) {
+                            mv.getPersonagens().get(0).usarHabilidades(mv);
+                        }
+                    }
+                } else {
+                    System.out.println("fase final:");
+                    System.out.println("O BOSS TE DESAFIOU!");
+                    System.out.println("1 - atacar");
+                    System.out.println("2 - estatisticas do personagem");
+                    System.out.println("3 - estatisticas do inimigo");
+                    System.out.println("4 - checar progresso");
+                    n = scan.next();
+
+                    if (Pattern.matches("[a-zA-Z]+", n)) {
+                        System.out.println("Somente números são válidos!");
+                    } else {
+                        numero = Integer.parseInt(n);
+
+                        if (numero == 1) {
+                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
+                            System.out.println("vez do inimigo:");
+                            mv.getInimigos().get(3).atacar(mv.getPersonagens().get(0));
+                            System.out.println("sua vez:");
+                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
+                            System.out.println("você derrotou o inimigo!");
+                            mv.getMissoes().get(0).completar(mv);
+                            mv.setPosicao(mv.getPosicao() + 1);
+                            break;
+                        } else if (numero == 2) {
+                            System.out.println(mv.getPersonagens().get(0).toString());
+                        } else if (numero == 3) {
+                            System.out.println(mv.getInimigos().get(3).toString());
+                        } else if (numero == 4) {
+                            mv.checarProgresso();
+                        }
+                    }
                 }
             }
         }
     }
 }
+
+

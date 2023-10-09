@@ -13,6 +13,7 @@ public class MundoVirtual {
     private List<Personagem> personagens;
     private List<Missao> missoes;
     private List<Inimigo> inimigos;
+    private List<Item> itens;
 
     Scanner sc = new Scanner(System.in);
 
@@ -21,6 +22,15 @@ public class MundoVirtual {
         this.personagens = new ArrayList<>();
         this.missoes = new ArrayList<>();
         this.inimigos = new ArrayList<>();
+        this.itens = new ArrayList<>();
+    }
+
+    public Integer getPosicao() {
+        return posicao;
+    }
+
+    public void setPosicao(Integer posicao) {
+        this.posicao = posicao;
     }
 
     public Double getProgresso() {
@@ -43,6 +53,10 @@ public class MundoVirtual {
         return inimigos;
     }
 
+    public List<Item> getItens() {
+        return itens;
+    }
+
     public Integer getX() {
         return x;
     }
@@ -51,41 +65,8 @@ public class MundoVirtual {
         return tabuleiro;
     }
 
-    public void inicarMissao(Missao missao, Personagem personagem) {
-        missao.iniciar(personagem);
-    }
-
-    public void completarMissao(Missao missao, Personagem personagem) {
-        missao.completar(personagem);
-    }
-
-    public void ataquePersonagem(Personagem personagem, Inimigo inimigo) {
-        personagem.atacar(inimigo);
-    }
-
-    public void ataqueInimigo(Inimigo inimigo, Personagem personagem) {
-        inimigo.atacar(personagem);
-    }
-
-    public void caminharPersonagem(Personagem personagem) {
-        System.out.println("Digite as coordenadas:");
-        int x = sc.nextInt();
-        personagem.caminhar(x);
-    }
-
-    public void pegarItemPersonagem(Personagem personagem, Item item) {
-        personagem.pegarItem(item);
-    }
-
-    public void usarHabilidadePersonagem(Personagem personagem, Habilidade habilidade) {
-        personagem.usarHabilidades(habilidade);
-    }
-
-    public void usarItemPersonagem(Personagem personagem, Item item) {
-        personagem.usarItem(item);
-    }
 
     public void checarProgresso() {
-        System.out.println("Progresso do jogo: " + ((100 / x) * (posicao + 1)));
+        System.out.println("Progresso do jogo: " + ((100 / x) * (posicao + 1)) + "%");
     }
 }

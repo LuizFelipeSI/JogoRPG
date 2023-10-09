@@ -55,4 +55,9 @@ public class Item {
             System.out.println(efeito);
         }
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }
