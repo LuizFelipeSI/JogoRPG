@@ -48,14 +48,6 @@ public class Item {
         return efeitos;
     }
 
-    public void usarItem(Item item) {
-        System.out.println("Você usou o item " + item.getNome());
-        System.out.println("O item " + item.getNome() + " concedeu os efeitos:");
-        for (String efeito : efeitos) {
-            System.out.println(efeito);
-        }
-    }
-
     @Override
     public String toString() {
         return nome;

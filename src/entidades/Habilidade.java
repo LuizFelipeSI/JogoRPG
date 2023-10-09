@@ -38,10 +38,4 @@ public class Habilidade {
     public void setCustoEnergia(Integer custoEnergia) {
         this.custoEnergia = custoEnergia;
     }
-
-    public void ativarHabilidade(Personagem personagem) {
-        System.out.println("A habilidade " + this.nome + " foi ativada");
-        personagem.setEnergia(personagem.getEnergia() - this.custoEnergia);
-        System.out.println(personagem.getNome() + " está com " + personagem.getEnergia() + " de energia");
-    }
 }

@@ -18,7 +18,9 @@ public class Menu {
         while(true) {
 
             if (mv.getPosicao() == 0) {
+                System.out.println("=======================================");
                 System.out.println("fase inicial:");
+                System.out.println("X - - - - - - -");
                 System.out.println("1 - caminhar");
                 System.out.println("2 - estatisticas do personagem");
                 System.out.println("3 - checar progresso");
@@ -39,7 +41,9 @@ public class Menu {
                 }
 
             } else if (mv.getPosicao() == 1) {
+                System.out.println("=======================================");
                 System.out.println("fase 2:");
+                System.out.println("V X - - - - - -");
                 System.out.println("Um inimigo te desafiou!");
                 System.out.println("1 - atacar");
                 System.out.println("2 - estatisticas do personagem");
@@ -73,7 +77,9 @@ public class Menu {
                 }
 
             } else if (mv.getPosicao() == 2) {
+                System.out.println("=======================================");
                 System.out.println("fase 3:");
+                System.out.println("V V X - - - - -");
                 System.out.println("1 - caminhar");
                 System.out.println("2 - estatisticas do personagem");
                 System.out.println("3 - checar progresso");
@@ -94,7 +100,9 @@ public class Menu {
                 }
 
             } else if (mv.getPosicao() == 3) {
+                System.out.println("=======================================");
                 System.out.println("fase 4:");
+                System.out.println("V V V X - - - -");
                 System.out.println("Um inimigo te desafiou!");
                 System.out.println("1 - atacar");
                 System.out.println("2 - estatisticas do personagem");
@@ -127,7 +135,9 @@ public class Menu {
                 }
 
             } else if (mv.getPosicao() == 4) {
+                System.out.println("=======================================");
                 System.out.println("fase 5:");
+                System.out.println("V V V V X - - -");
                 System.out.println("1 - caminhar");
                 System.out.println("2 - estatisticas do personagem");
                 System.out.println("3 - checar progresso");
@@ -148,7 +158,9 @@ public class Menu {
                 }
 
             } else if (mv.getPosicao() == 5) {
+                System.out.println("=======================================");
                 System.out.println("fase 6:");
+                System.out.println("V V V V V X - -");
                 System.out.println("Um inimigo te desafiou!");
                 System.out.println("1 - atacar");
                 System.out.println("2 - estatisticas do personagem");
@@ -184,7 +196,9 @@ public class Menu {
                 }
 
             } else if (mv.getPosicao() == 6) {
+                System.out.println("=======================================");
                 System.out.println("fase 7:");
+                System.out.println("V V V V V V X -");
                 System.out.println("1 - caminhar");
                 System.out.println("2 - estatisticas do personagem");
                 System.out.println("3 - checar progresso");
@@ -207,7 +221,9 @@ public class Menu {
 
             else if (mv.getPosicao() == 7) {
                 if (mv.getPersonagens().get(0).getNivel() == 4) {
+                    System.out.println("=======================================");
                     System.out.println("fase final:");
+                    System.out.println("V V V V V V V X");
                     System.out.println("O BOSS TE DESAFIOU!");
                     System.out.println("1 - atacar");
                     System.out.println("2 - estatisticas do personagem");
@@ -242,7 +258,9 @@ public class Menu {
                         }
                     }
                 } else {
+                    System.out.println("=======================================");
                     System.out.println("fase final:");
+                    System.out.println("V V V V V V V X");
                     System.out.println("O BOSS TE DESAFIOU!");
                     System.out.println("1 - atacar");
                     System.out.println("2 - estatisticas do personagem");
@@ -278,5 +296,3 @@ public class Menu {
         }
     }
 }
-
-

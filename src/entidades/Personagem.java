@@ -104,12 +104,14 @@ public class Personagem {
     }
 
     public void usarHabilidades(MundoVirtual mv) {
-        mv.getPersonagens().get(0).setDano(mv.getPersonagens().get(0).getDano() + 30);
-        mv.getPersonagens().get(0).setSaude(mv.getPersonagens().get(0).getSaude() + 30);
-        mv.getPersonagens().get(0).setEnergia(mv.getPersonagens().get(0).getEnergia() + 30);
+        mv.getPersonagens().get(0).setDano(mv.getPersonagens().get(0).getDano() + 50);
+        mv.getPersonagens().get(0).setSaude(mv.getPersonagens().get(0).getSaude() + 50);
+        mv.getPersonagens().get(0).setEnergia(mv.getPersonagens().get(0).getEnergia()
+                - mv.getPersonagens().get(0).getHabilidades().get(0).getCustoEnergia());
+
         mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
 
-        System.out.println("todos os seus atributos foram aumentados em 30 pontos");
+        System.out.println("seu dano e saúde foram aumentados em 50 pontos");
     }
 
     @Override

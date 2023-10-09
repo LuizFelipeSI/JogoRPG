@@ -17,7 +17,7 @@ public class Main {
         Inimigo in3 = new Inimigo("Dragão", 80, 40, 1000, 3);
         Inimigo in4 = new Inimigo("Rei dos montros", 100, 160, 1200, 4);
 
-        Habilidade h1 = new Habilidade("ultimate", "aumenta em 30 pontos todos os atributos", 100);
+        Habilidade h1 = new Habilidade("ultimate", "aumenta em 50 pontos de dano e saúde", 100);
 
         Item i1 = new Item("poção de cura", "aumenta sua vida em 20 pontos", "utilitário");
         Item i2 = new Item("pulmão de aço", "aumenta sua energia em 50 pontos", "encantamento");
@@ -34,6 +34,7 @@ public class Main {
         m1.getObjetivos().add(m1.getTitulo());
 
 
+        p.getHabilidades().add(h1);
 
         mv.getPersonagens().add(p);
         mv.getInimigos().add(in1);
