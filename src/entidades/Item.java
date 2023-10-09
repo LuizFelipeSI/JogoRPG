@@ -50,6 +50,6 @@ public class Item {
 
     @Override
     public String toString() {
-        return nome;
+        return nome + ": " + descricao;
     }
 }

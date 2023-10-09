@@ -1,9 +1,8 @@
 package entidades;
 
-import visualizacao.Menu;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Personagem {
 
@@ -14,6 +13,26 @@ public class Personagem {
     private Integer nivel;
     private List<Habilidade> habilidades;
     private List<Item> itens;
+    private boolean fracasso = false;
+    private boolean sucesso = false;
+
+    Scanner sc = new Scanner(System.in);
+
+    public boolean isFracasso() {
+        return fracasso;
+    }
+
+    public void setFracasso(boolean fracasso) {
+        this.fracasso = fracasso;
+    }
+
+    public boolean isSucesso() {
+        return sucesso;
+    }
+
+    public void setSucesso(boolean sucesso) {
+        this.sucesso = sucesso;
+    }
 
     public Personagem() {
     }
@@ -86,26 +105,40 @@ public class Personagem {
             if (mv.getPersonagens().get(0).getNivel() < 4) {
                 mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
                 System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
+                if (mv.getPersonagens().get(0).getNivel() == 4) {
+                    System.out.println("você desbloqueou a sua ULTIMATE!");
+                }
             }
             if (x == 3) {
                 mv.getMissoes().get(0).completar(mv);
                 mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
+                setSucesso(true);
             } else {
                 mv.getPersonagens().get(0).pegarItem(mv,x);
+                while (true) {
+                    System.out.println("deseja usar o item? (s/n) / o item só pode ser usado nessa fase");
+                    String opcao = sc.nextLine().toLowerCase();
+                    if (opcao.equalsIgnoreCase("s")) {
+                        mv.getPersonagens().get(0).usarItem(mv, x);
+                        break;
+                    } else if (opcao.equalsIgnoreCase("n")){
+                        System.out.println("o item foi descartado");
+                        break;
+                    } else {
+                        System.out.println("opção inválida");
+                    }
+                }
             }
-            mv.getPersonagens().get(0).usarItem(mv,x);
             mv.getPersonagens().get(0).getItens().add(mv.getItens().get(x));
-            if (mv.getPersonagens().get(0).getNivel() == 4) {
-                System.out.println("você desbloqueou a sua ULTIMATE!");
-            }
+
             mv.setPosicao(mv.getPosicao() + 1);
         } else {
             System.out.println("vez do inimigo:");
             mv.getInimigos().get(x).atacar(mv.getPersonagens().get(0));
             if (mv.getPersonagens().get(0).getSaude() <= 0) {
                 mv.getMissoes().get(0).fracassar();
+                setFracasso(true);
                 mv.setPosicao(mv.getPosicao() + 1);
-
             } else {
                 mv.getPersonagens().get(0).atacar(mv, x);
             }
@@ -113,9 +146,14 @@ public class Personagem {
     }
 
     public void pegarItem(MundoVirtual mv, int x) {
-
-        System.out.println("Você ganhou o item " + mv.getItens().get(x).getNome());
-        itens.add(mv.getItens().get(x));
+        System.out.println();
+        if (x == 3) {
+            System.out.println("Você ganhou o item " + mv.getMissoes().get(0).getRecompensas().get(0));
+            itens.add(mv.getMissoes().get(0).getRecompensas().get(0));
+        } else {
+            System.out.println("Você ganhou o item " + mv.getItens().get(x).toString());
+            itens.add(mv.getItens().get(x));
+        }
     }
 
     public void usarItem(MundoVirtual mv, int x) {

@@ -9,9 +9,9 @@ public class Menu {
 
     public MundoVirtual mv;
     Scanner scan = new Scanner(System.in);
-    String n;
-    int numero;
-    boolean fimDeJogo = false;
+    private String n;
+    private int numero;
+    private boolean fimDeJogo = false;
 
     public boolean isFimDeJogo() {
         return fimDeJogo;
@@ -19,6 +19,22 @@ public class Menu {
 
     public void setFimDeJogo(boolean fimDeJogo) {
         this.fimDeJogo = fimDeJogo;
+    }
+
+    public String getN() {
+        return n;
+    }
+
+    public void setN(String n) {
+        this.n = n;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
     public void menuPosicao(MundoVirtual mv) {
@@ -68,6 +84,9 @@ public class Menu {
 
                     if (numero == 1) {
                         mv.getPersonagens().get(0).atacar(mv, 0);
+                        if (mv.getPersonagens().get(0).isFracasso()) {
+                            break;
+                        }
                     } else if (numero == 2) {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
@@ -123,6 +142,9 @@ public class Menu {
 
                     if (numero == 1) {
                         mv.getPersonagens().get(0).atacar(mv,1);
+                        if (mv.getPersonagens().get(0).isFracasso()) {
+                            break;
+                        }
                     } else if (numero == 2) {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
@@ -177,6 +199,9 @@ public class Menu {
 
                     if (numero == 1) {
                         mv.getPersonagens().get(0).atacar(mv,2);
+                        if (mv.getPersonagens().get(0).isFracasso()) {
+                            break;
+                        }
                     } else if (numero == 2) {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
@@ -234,7 +259,11 @@ public class Menu {
 
                         if (numero == 1) {
                             mv.getPersonagens().get(0).atacar(mv,3);
-                            break;
+                            if (mv.getPersonagens().get(0).isFracasso()) {
+                                break;
+                            } else if (mv.getPersonagens().get(0).isSucesso()) {
+                                break;
+                            }
                         } else if (numero == 2) {
                             System.out.println(mv.getPersonagens().get(0).toString());
                         } else if (numero == 3) {
@@ -265,7 +294,11 @@ public class Menu {
 
                         if (numero == 1) {
                             mv.getPersonagens().get(0).atacar(mv,3);
-                            break;
+                            if (mv.getPersonagens().get(0).isFracasso()) {
+                                break;
+                            } else if (mv.getPersonagens().get(0).isSucesso()) {
+                                break;
+                            }
                         } else if (numero == 2) {
                             System.out.println(mv.getPersonagens().get(0).toString());
                         } else if (numero == 3) {
