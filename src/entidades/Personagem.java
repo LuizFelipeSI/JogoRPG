@@ -1,5 +1,7 @@
 package entidades;
 
+import visualizacao.Menu;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,10 +76,40 @@ public class Personagem {
         return itens;
     }
 
-    public void atacar(Inimigo inimigo) {
-        System.out.println("Você atacou o inimigo " + inimigo.getNome());
-        inimigo.setSaude(inimigo.getSaude() - getDano());
-        System.out.println("O inimigo " + inimigo.getNome() + " está com " + inimigo.getSaude() + " de saúde");
+    public void atacar(MundoVirtual mv, int x) {
+        System.out.println("Você atacou o inimigo " + mv.getInimigos().get(x).getNome());
+        mv.getInimigos().get(x).setSaude(mv.getInimigos().get(x).getSaude() - getDano());
+        System.out.println("O inimigo " + mv.getInimigos().get(x).getNome() + " está com " + mv.getInimigos().get(x).getSaude() + " de saúde");
+
+        if (mv.getInimigos().get(x).getSaude() <= 0) {
+            System.out.println("você derrotou o inimigo!");
+            if (mv.getPersonagens().get(0).getNivel() < 4) {
+                mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
+                System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
+            }
+            if (x == 3) {
+                mv.getMissoes().get(0).completar(mv);
+                mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
+            } else {
+                mv.getPersonagens().get(0).pegarItem(mv,x);
+            }
+            mv.getPersonagens().get(0).usarItem(mv,x);
+            mv.getPersonagens().get(0).getItens().add(mv.getItens().get(x));
+            if (mv.getPersonagens().get(0).getNivel() == 4) {
+                System.out.println("você desbloqueou a sua ULTIMATE!");
+            }
+            mv.setPosicao(mv.getPosicao() + 1);
+        } else {
+            System.out.println("vez do inimigo:");
+            mv.getInimigos().get(x).atacar(mv.getPersonagens().get(0));
+            if (mv.getPersonagens().get(0).getSaude() <= 0) {
+                mv.getMissoes().get(0).fracassar(mv);
+                mv.setPosicao(mv.getPosicao() + 1);
+
+            } else {
+                mv.getPersonagens().get(0).atacar(mv, x);
+            }
+        }
     }
 
     public void pegarItem(MundoVirtual mv, int x) {
@@ -104,14 +136,18 @@ public class Personagem {
     }
 
     public void usarHabilidades(MundoVirtual mv) {
-        mv.getPersonagens().get(0).setDano(mv.getPersonagens().get(0).getDano() + 50);
-        mv.getPersonagens().get(0).setSaude(mv.getPersonagens().get(0).getSaude() + 50);
-        mv.getPersonagens().get(0).setEnergia(mv.getPersonagens().get(0).getEnergia()
-                - mv.getPersonagens().get(0).getHabilidades().get(0).getCustoEnergia());
+        if (mv.getPersonagens().get(0).getEnergia() >= mv.getPersonagens().get(0).getHabilidades().get(0).getCustoEnergia()) {
+            mv.getPersonagens().get(0).setDano(mv.getPersonagens().get(0).getDano() + 50);
+            mv.getPersonagens().get(0).setSaude(mv.getPersonagens().get(0).getSaude() + 50);
+            mv.getPersonagens().get(0).setEnergia(mv.getPersonagens().get(0).getEnergia()
+                    - mv.getPersonagens().get(0).getHabilidades().get(0).getCustoEnergia());
 
-        mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
+            mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
 
-        System.out.println("seu dano e saúde foram aumentados em 50 pontos");
+            System.out.println("seu dano e saúde foram aumentados em 50 pontos");
+        } else {
+            System.out.println("você não tem energia suficiente");
+        }
     }
 
     @Override

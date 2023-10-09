@@ -10,18 +10,18 @@ public class Main {
         Menu m = new Menu();
         MundoVirtual mv = new MundoVirtual();
 
-        Personagem p = new Personagem("Baldur", 40, 100, 200);
+        Personagem p = new Personagem("Kratos", 40, 20, 60);
 
         Inimigo in1 = new Inimigo("Orc", 20, 30, 160, 1);
         Inimigo in2 = new Inimigo("Mago", 40, 20, 300, 2);
         Inimigo in3 = new Inimigo("Dragão", 80, 40, 1000, 3);
-        Inimigo in4 = new Inimigo("Rei dos montros", 100, 160, 1200, 4);
+        Inimigo in4 = new Inimigo("Rei dos montros", 40, 200, 1200, 4);
 
         Habilidade h1 = new Habilidade("ultimate", "aumenta em 50 pontos de dano e saúde", 100);
 
-        Item i1 = new Item("poção de cura", "aumenta sua vida em 20 pontos", "utilitário");
+        Item i1 = new Item("poção de cura", "aumenta sua saúde em 20 pontos", "utilitário");
         Item i2 = new Item("pulmão de aço", "aumenta sua energia em 50 pontos", "encantamento");
-        Item i3 = new Item("chamas do caos", "aumenta seu dano em 50 pontos", "arma");
+        Item i3 = new Item("chamas do caos", "aumenta seu dano em 40 pontos", "arma");
         Item i4 = new Item("coroa do rei", "os inimigos não te atacam mais", "vestimenta");
 
         Missao m1 = new Missao("derrotar o líder do castelo", "missão de nível 4");

@@ -49,8 +49,11 @@ public class Missao {
     }
 
     public void completar(MundoVirtual mv) {
-
         System.out.println("A missão " + this.titulo + " foi completada");
         mv.getPersonagens().get(0).pegarItem(mv,3);
+    }
+
+    public void fracassar(MundoVirtual mv) {
+        System.out.println("Voçê morreu!!!");
     }
 }

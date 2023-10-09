@@ -11,11 +11,19 @@ public class Menu {
     Scanner scan = new Scanner(System.in);
     String n;
     int numero;
+    boolean fimDeJogo = false;
 
+    public boolean isFimDeJogo() {
+        return fimDeJogo;
+    }
+
+    public void setFimDeJogo(boolean fimDeJogo) {
+        this.fimDeJogo = fimDeJogo;
+    }
 
     public void menuPosicao(MundoVirtual mv) {
 
-        while(true) {
+        while(!fimDeJogo) {
 
             if (mv.getPosicao() == 0) {
                 System.out.println("=======================================");
@@ -37,6 +45,8 @@ public class Menu {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
                         mv.checarProgresso();
+                    } else {
+                        System.out.println("opção inválida");
                     }
                 }
 
@@ -57,15 +67,7 @@ public class Menu {
                     numero = Integer.parseInt(n);
 
                     if (numero == 1) {
-                        mv.getPersonagens().get(0).atacar(mv.getInimigos().get(0));
-                        System.out.println("você derrotou o inimigo!");
-                        mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
-                        System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
-                        mv.getPersonagens().get(0).pegarItem(mv,0);
-                        mv.getPersonagens().get(0).usarItem(mv,0);
-                        mv.getPersonagens().get(0).getItens().add(mv.getItens().get(0));
-
-                        mv.setPosicao(mv.getPosicao() + 1);
+                        mv.getPersonagens().get(0).atacar(mv, 0);
                     } else if (numero == 2) {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
@@ -73,6 +75,8 @@ public class Menu {
                     }
                     else if (numero == 4) {
                         mv.checarProgresso();
+                    } else {
+                        System.out.println("opção inválida");
                     }
                 }
 
@@ -96,6 +100,8 @@ public class Menu {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
                         mv.checarProgresso();
+                    } else {
+                        System.out.println("opção inválida");
                     }
                 }
 
@@ -116,21 +122,15 @@ public class Menu {
                     numero = Integer.parseInt(n);
 
                     if (numero == 1) {
-                        mv.getPersonagens().get(0).atacar(mv.getInimigos().get(1));
-                        System.out.println("você derrotou o inimigo!");
-                        mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
-                        System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
-                        mv.getPersonagens().get(0).pegarItem(mv,1);
-                        mv.getPersonagens().get(0).usarItem(mv,1);
-                        mv.getPersonagens().get(0).getItens().add(mv.getItens().get(1));
-
-                        mv.setPosicao(mv.getPosicao() + 1);
+                        mv.getPersonagens().get(0).atacar(mv,1);
                     } else if (numero == 2) {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
                         System.out.println(mv.getInimigos().get(1).toString());
                     } else if (numero == 4) {
                         mv.checarProgresso();
+                    } else {
+                        System.out.println("opção inválida");
                     }
                 }
 
@@ -154,6 +154,8 @@ public class Menu {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
                         mv.checarProgresso();
+                    } else {
+                        System.out.println("opção inválida");
                     }
                 }
 
@@ -174,24 +176,15 @@ public class Menu {
                     numero = Integer.parseInt(n);
 
                     if (numero == 1) {
-                        mv.getPersonagens().get(0).atacar(mv.getInimigos().get(2));
-                        System.out.println("você derrotou o inimigo!");
-                        mv.getPersonagens().get(0).setNivel(mv.getPersonagens().get(0).getNivel() + 1);
-                        System.out.println("você subiu para o nível " + mv.getPersonagens().get(0).getNivel());
-                        if (mv.getPersonagens().get(0).getNivel() == 4) {
-                            System.out.println("você desbloqueou a sua ULTIMATE!");
-                        }
-                        mv.getPersonagens().get(0).pegarItem(mv,2);
-                        mv.getPersonagens().get(0).usarItem(mv,2);
-                        mv.getPersonagens().get(0).getItens().add(mv.getItens().get(2));
-
-                        mv.setPosicao(mv.getPosicao() + 1);
+                        mv.getPersonagens().get(0).atacar(mv,2);
                     } else if (numero == 2) {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
                         System.out.println(mv.getInimigos().get(2).toString());
                     } else if (numero == 4) {
                         mv.checarProgresso();
+                    } else {
+                        System.out.println("opção inválida");
                     }
                 }
 
@@ -215,6 +208,8 @@ public class Menu {
                         System.out.println(mv.getPersonagens().get(0).toString());
                     } else if (numero == 3) {
                         mv.checarProgresso();
+                    } else {
+                        System.out.println("opção inválida");
                     }
                 }
             }
@@ -238,14 +233,7 @@ public class Menu {
                         numero = Integer.parseInt(n);
 
                         if (numero == 1) {
-                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
-                            System.out.println("vez do inimigo:");
-                            mv.getInimigos().get(3).atacar(mv.getPersonagens().get(0));
-                            System.out.println("sua vez:");
-                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
-                            System.out.println("você derrotou o inimigo!");
-                            mv.getMissoes().get(0).completar(mv);
-                            mv.setPosicao(mv.getPosicao() + 1);
+                            mv.getPersonagens().get(0).atacar(mv,3);
                             break;
                         } else if (numero == 2) {
                             System.out.println(mv.getPersonagens().get(0).toString());
@@ -255,6 +243,8 @@ public class Menu {
                             mv.checarProgresso();
                         } else if (numero == 5) {
                             mv.getPersonagens().get(0).usarHabilidades(mv);
+                        } else {
+                            System.out.println("opção inválida");
                         }
                     }
                 } else {
@@ -274,14 +264,7 @@ public class Menu {
                         numero = Integer.parseInt(n);
 
                         if (numero == 1) {
-                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
-                            System.out.println("vez do inimigo:");
-                            mv.getInimigos().get(3).atacar(mv.getPersonagens().get(0));
-                            System.out.println("sua vez:");
-                            mv.getPersonagens().get(0).atacar(mv.getInimigos().get(3));
-                            System.out.println("você derrotou o inimigo!");
-                            mv.getMissoes().get(0).completar(mv);
-                            mv.setPosicao(mv.getPosicao() + 1);
+                            mv.getPersonagens().get(0).atacar(mv,3);
                             break;
                         } else if (numero == 2) {
                             System.out.println(mv.getPersonagens().get(0).toString());
@@ -289,6 +272,8 @@ public class Menu {
                             System.out.println(mv.getInimigos().get(3).toString());
                         } else if (numero == 4) {
                             mv.checarProgresso();
+                        } else {
+                            System.out.println("opção inválida");
                         }
                     }
                 }

@@ -10,7 +10,7 @@ public class Inimigo {
     private Integer saude;
     private Integer energia;
     private Integer nivel;
-    private List<Habilidade> habilidadesCombate;
+    private List<Item> itens;
 
     public Inimigo() {
     }
@@ -21,7 +21,7 @@ public class Inimigo {
         this.saude = saude;
         this.energia = energia;
         this.nivel = nivel;
-        this.habilidadesCombate = new ArrayList<>();
+        this.itens = new ArrayList<>();
     }
 
     public String getNome() {
@@ -64,8 +64,8 @@ public class Inimigo {
         this.energia = energia;
     }
 
-    public List<Habilidade> getHabilidadesCombate() {
-        return habilidadesCombate;
+    public List<Item> getHabilidadesCombate() {
+        return itens;
     }
 
     public void atacar(Personagem personagem) {
